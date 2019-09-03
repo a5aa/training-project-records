@@ -119,7 +119,7 @@ db.createCollection("user")
 
    3.效果图（数据库中前端发送的数据）
 
-   ![avatar](.\image\db.png)
+   ![avatar](image\db.png)
 
 **代码样例：**
 
