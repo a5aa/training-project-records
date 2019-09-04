@@ -1,28 +1,31 @@
-﻿# Day1
-## A 搭建Mongodb环境并建立表存储温度数据
-#### 搭建环境：Ubuntu 18.04
+[TOC]
 
-#### 安装下载
+# Day1
+
+## 一、搭建Mongodb环境并建立表存储温度数据
+### 1. 搭建环境：Ubuntu 18.04
+
+#### 1.1. 安装下载
       sudo apt-get install mongodb
-#### 启动服务
+#### 1.2. 启动服务
       mongod
-#### 登陆客户端
+#### 1.3. 登陆客户端
       mongo
-#### 建立demo数据库并在其中添加存有温度信息的表
+#### 1.4. 建立demo数据库并在其中添加存有温度信息的表
      use demo
      db.createCollection("tmp")
      db.tmp.insert({place:‘placeA’,tmp:20,time:20190901.0700})
      db.tmp.insert({place:‘placeA’,tmp:30,time:20190901.1200})
      db.tmp.insert({place:‘placeA’,tmp:24,time:20190901.2300})
 
-#### 下载地址
+### 2. 下载地址
  https://robomongo.org/down
-#### 具体安装流程参考
+### 3. 具体安装流程参考
  https://www.jianshu.com/p/2a76fb6e4f8b
 
-## C 搭建三个节点的分布式数据库
+## 二、搭建三个节点的分布式数据库
 
-#### 端口分配
+### 1. 端口分配
      27018：config server（master）
      27019：config server（slave）
      27020：config arbiter
@@ -42,8 +45,8 @@
     shard和shard2集群：存放实际数据的集群，其中,slave和arbiter分片为备用分片，当master分片运行异常时启动
     router节点：路由节点挂，在该节点下插入的数据将依照相应的分片规则自动分配在该节点下注册过的集群中
 
-#### 搭建流程
-- 搭建config集群
+### 2. 搭建流程
+#### 2.1. 搭建config集群
 ~~~
 1.新建文件夹在该文件下添加config集群的文件夹和相关配置文件
 2.在配置文件中写入如下代码，以confiMaster.conf为例子
@@ -120,9 +123,9 @@ for(i=1,i<=1000,i++){db.t.insert({id:i,name:"Lihua"})}
 登陆shard_master节点和shard2_master节点进行验证
 db.t.count()
 ~~~
-#### mongodb分布式数据库搭建完成
+**mongodb分布式数据库搭建完成**
 
-## D测试Mongodb数据库性能
+### 3. 测试Mongodb数据库性能
 - 测试工具
 - mongo-mload
 - 下载地址
@@ -150,7 +153,7 @@ https://github.com/eshujiushiwo/mongo-mload
       --geo          是否进行空间地理数据的测试（默认false, 即普通查询和索引；true 则使用经纬度类型数据进行查询）
       --geofield          空间地理查询测试使用的2d sphere字段名称（默认 loc）
   
-#### 对刚搭建好的数据库进行测试
+#### 3.1. 对刚搭建好的数据库进行测试
 - 插入测试
 ~~~
 清理数据库
@@ -190,24 +193,28 @@ go run mload.go --host 127.0.0.1 --datanum 1 --procnum 10 --operation update
 
 # Day2
 
-### 参考
+## 一、参考
 
-##### thinkjs框架
+### 1. thinkjs框架
 
 https://thinkjs.org/doc/index.html
 
-# 后端服务
+### 2. 物流模拟
 
-### 框架选择
+https://www.jianshu.com/p/e232c3c9af37
+
+## 二、后端服务
+
+### 1. 框架选择
 
 - python + Thinkjs + mongodb
 - python + flask + mongodb
 
-## A 搭建一个后端项目
+## 三、搭建一个后端项目
 
-### Thinkjs
+### 1. Thinkjs
 
-#### 安装环境
+#### 1.1. 安装环境
 
 - 安装Node.js
 
@@ -240,7 +247,7 @@ https://thinkjs.org/doc/index.html
 
       `$ npm uninstall -g thinkjs`
 
-#### 创建项目
+#### 1.2. 创建项目
 
 - 在项目目录的终端下创建项目
 
@@ -274,11 +281,11 @@ https://thinkjs.org/doc/index.html
 
 ------
 
-### flask
+### 2. flask
 
 - 为了操作方便，使用pycharm
 
-#### 安装下载
+#### 2.1. 安装下载
 
 - 安装flask连接mongodb专用包工具
 
@@ -294,18 +301,18 @@ https://thinkjs.org/doc/index.html
       # 导入第三方包flask_pymongo,连接mongodb
   ```
 
-#### 启动程序
+#### 2.2. 启动程序
 
 ```
         if name == 'main':
             app.run(debug = True)
 ```
 
-## B 实现后端项目与mongodb连接
+## 四、实现后端项目与mongodb连接
 
-### Thinkjs
+### 1. Thinkjs
 
-#### 让框架支持mongdb
+#### 1.1. 让框架支持mongdb
 
 - 安装 ***think-mongo*** 模块
 
@@ -321,7 +328,7 @@ https://thinkjs.org/doc/index.html
       ]
   ```
 
-#### 创建mongodb
+#### 1.2. 创建mongodb
 
 - 在项目 ***根目录*** 下新建 ***db*** 目录，用于存放数据
 
@@ -337,7 +344,7 @@ https://thinkjs.org/doc/index.html
 
   - 以后也要在此目录下开启服务，否则后台连接不上服务器
 
-#### 连接mongodb
+#### 1.3. 连接mongodb
 
 - 修改 ***config*** 目录下的 ***adapter.js*** 文件
 
@@ -345,11 +352,11 @@ https://thinkjs.org/doc/index.html
 
 ------
 
-### flask
+### 2. flask
 
-#### 配置环境
+#### 2.1. 配置环境
 
-​   ```
+   ```
         app = Flask(__name__)
         app.config['MONGO_URI'] = "mongodb://127.0.0.1:27017/db_name"
         # 实例化数据库配置，可以直接一行解决
@@ -357,19 +364,19 @@ https://thinkjs.org/doc/index.html
 
 #### 实例化数据库
 
-​   ```
+   ```
         mongo = PyMongo(app)
 ​   ```
 
-## C 通过后端实现对mongodb的CURD操作
+## 五、通过后端实现对mongodb的CURD操作
 
-### Thinkjs
+### 1. Thinkjs
 
-#### 添加路由
+#### 1.1. 添加路由
 
 - 在 ***controller*** 目录下
 
-##### 修改初始页面
+#### 1.2. 修改初始页面
 
 - ***index.js*** 文件 修改返回值
 
@@ -381,11 +388,11 @@ https://thinkjs.org/doc/index.html
       };
   ```
 
-#### thinkjs 对 mongdb 的 CURD
+#### 1.3. thinkjs 对 mongdb 的 CURD
 
 https://thinkjs.org/zh-cn/doc/2.2/model_crud.html
 
-#### thinkjs 特定 CURD 封装
+#### 1.4. thinkjs 特定 CURD 封装
 
 https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
@@ -425,9 +432,9 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ------
 
-### flask
+### 2. flask
 
-#### 添加路由
+#### 2.1. 添加路由
 
 - 添加根页面api
 
@@ -441,7 +448,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
    
   ```
 
-#### flask 对 mongo 的 CURD
+#### 2.2. flask 对 mongo 的 CURD
 
 - 增
 
@@ -504,19 +511,15 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
   
   ```
 
-
 ------
 ------
 
-# 物流模拟
 
->参考  https://www.jianshu.com/p/e232c3c9af37
- 
-## D 使用小程序获取地理位置的Api
+## 六、使用小程序获取地理位置的Api
 
-### 小程序获取位置信息
+### 1. 小程序获取位置信息
 
-#### 实现流程
+#### 1.1. 实现流程
 
 + 获取权限
 
@@ -527,7 +530,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 + 根据获取到的数据，打开地图
 
 
-#### 实现
+#### 1.2. 实现方法
 
 + 在 ***app.json*** 中配置
 
@@ -646,13 +649,13 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ------
 
-### 小程序调用高德地图api获取地理位置信息
+### 2. 小程序调用高德地图api获取地理位置信息
 
 > 微信小程序的接口，只能得到经纬度，但有时候我们需要得到具体的城市或者区域信息，这就需要借助高德地图了（或者腾讯地图等，逻辑都是一样的，但百度时间多可以试试）。
 
 > 参考 高德 https://lbs.amap.com/api/wx/gettingstarted
 
-#### 实现流程
+#### 2.1. 实现流程
 
 + 注册开发者
 + 获取key
@@ -664,9 +667,9 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
     + 地址描述数据
     + 实时天气数据
 
-#### 实现
+#### 2.2. 实现方法
 
-##### 获取key
+##### 2.2.1. 获取key
 
 + 进入控制台，创建新项目
 
@@ -680,7 +683,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
     ![](./image/mnp_amap_3.png)
 
-##### 配置项目
+##### 2.2.2. 配置项目
 
 + 设置安全通讯域名
 
@@ -697,12 +700,12 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
         ![](./image/mnp_amap_config_2.png)
 
 + 下载api https://lbs.amap.com/api/wx/download
-    
+  
     + 将解压后得到的 ***amap-wx.js*** 文件拷贝至 项目新建目录 ***libs*** 下
 
         ![](./image/mnp_amap_config_1.png)
 
-##### 调用api 获取数据
+##### 2.2.3. 调用api 获取数据
 
 + ***wxml*** 中使用<map></map>组件渲染地图
 
@@ -838,7 +841,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
         ![](./image/mnp_amap_weather.png)
 
-## E 编写地理信息存储Api
+## 七、编写地理信息存储Api
 
 >   以从高德地图api的数据为例
 >   address latitude longitude name
@@ -873,7 +876,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
     
 ```
 
-## F 小程序中整合二维码扫描功能
+## 八、小程序中整合二维码扫描功能
 
 > 官方文档： https://mp.weixin.qq.com/debug/wxadoc/dev/api/scancode.html
 
@@ -917,41 +920,361 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ```
 
-## G 生成一个二维码保存自己的信息（姓名、学号等）扫码后发送post请求保存这些数据
+## 九、传递数据到后端
 
-### 生成一个二维码
+### 1. 生成一个二维码
 
 + https://cli.im/ - 草料二维码
 
-### 扫码后 将数据post给后端
+扫码后 将数据post给后端
+参考 **7 - 编写地理信息存储API**
 
-#### 参考 E
+## 十、后端对个人信息数据进行接收，存储到数据库中
 
-## H 后端对个人信息数据进行接收，存储到数据库中
-
-#### 参考 C - thinkjs 特定 CURD 封装
+参考 **5.1.4 - thinkjs 特定 CURD 封装**
 
 ------
+
+
+
+# Day 3
+
+## 一、微信小程序调用地图api
+
+### 1. 准备工作
+
+   基本流程
+
+1. 注册账号
+2. 申请开发者密钥
+3. 下载SDK 
+
+百度地图开发者平台:http://lbsyun.baidu.com
+
+### 2. 环境配置
+
+1. 创建本地小程序项目
+
+2. 引入js模块
+
+   在根目录下创建一个路径，下载百度地图微信小程序JavaScriptAPI，解压后的文件中有 bmap-wx.js 文件(压缩版 bmap-wx.min.js )，将其拷贝到新建的路径下，安装完成。
+
+3. 请求合法域名
+
+   登录微信公众平台－> "设置" －> "开发设置" －> "request 合法域名" －>添加 api.map.baidu.com －> 点击"保存并提交"。
+
+### 3. 实现方法
+
+本案例使用百度地图的**地址解析API**
+
+**原理：** 
+
+1. 引用百度地图微信小程序JavaScript API 模块
+2. 在页面的onLoad中声明BMapWX对象
+3. 调用BMapWX.geocoding方法进行地址解析
+
+**参阅：**
+
+[百度地图地址解析](https://lbs.baidu.com/index.php?title=wxjsapi/guide/geocoding)
+
+
+
+## 二、百度地图获取数据库表中信息的坐标显示在地图上
+
+### 1. index.js代码
+
+```
+   //通用封装好的js:
+
+var map = new BMap.Map("container"); //建树Map实例
+var point = new BMap.Point(103.976032, 33.845509); // 建树点坐标
+map.centerAndZoom(point, 6); // 初始化地图,设置中心点坐标和地图级别。
+//地图事件设置函数：
+map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
+map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
+map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
+map.enableKeyboard(); //启用键盘上下左右键移动地图
+
+//向地图中添加缩放控件
+var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
+map.addControl(ctrl_nav);
+//向地图中添加缩略图控件
+var ctrl_ove = new BMap.OverviewMapControl({ anchor: BMAP_ANCHOR_BOTTOM_RIGHT, isOpen: 1 });
+map.addControl(ctrl_ove);
+//向地图中添加比例尺控件
+var ctrl_sca = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_BOTTOM_LEFT });
+map.addControl(ctrl_sca);
+//创建marker
+function addMarker() {
+    for (var i = 0; i < markerArr.length; i++) {
+        var json = markerArr[i];
+        var p0 = json.point.split("|")[0];
+        var p1 = json.point.split("|")[1];
+        var point = new BMap.Point(p0, p1);
+        
+        var iconImg = createIcon(json.icon);
+        var marker = new BMap.Marker(point, { icon: iconImg });
+        map.addOverlay(marker);
+    }
+}
+//创建一个Icon
+function createIcon(json) {
+    // 创建图标对象   
+        //var myIcon = new BMap.Icon("../marker_red_sprite.png", new BMap.Size(23, 25), {
+        //    // 指定定位位置。   
+        //    // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+        //    // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+        //    // 图标中央下端的尖角位置。    
+        //    offset: new BMap.Size(10, 25),    
+        //    // 设置图片偏移。   
+        //    // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+        //    // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+        //    //imageOffset: new BMap.Size(0, 0 - index * 25)   // 设置图片偏移    
+        //});
+    var icon = new BMap.Icon(图片名称, new BMap.Size(json.w, json.h), { imageOffset: new BMap.Size(-json.l, -json.t), infoWindowOffset: new BMap.Size(json.lb + 5, 1), offset: new BMap.Size(json.x, json.h) })
+    return icon;
+}
+```
+
+### 2. 获取数据库数据
+
+```
+<html>
+ <head>
+  <title>百度地图加载</title>
+ </head>
+ <script src="Map.js"></script>
+ <script type="text/javascript"> 
+    
+    //声明全局数组
+    var markerArr = [];
+    $(function () {
+        //点击查询加载标注
+        $("#btnSearch").click(function () {
+            LoadMap();
+        });
+
+    });
+
+    //加载游客地理位置
+    function LoadMap() {
+       //清空数组和所有标注点
+        markerArr = [];
+        map.clearOverlays();
+        var par={
+            startDate:$("#startDate").val(),
+            endDate:$("#endDate").val()
+        }
+        $.ajax({
+            type: "get",
+            url: "/VisitorClient/GetAllInfo",
+            data: par,
+            dataType:"json",
+            cache: false,
+            success: function (r) {
+                if (r.res) { 
+                    dataBind(r);
+                    $("#spannum").text("该时段App园区游客人数为：" + r.count);
+                }
+                else {
+                    $("#spannum").text("该时段园区没有人使用App");
+                }
+                
+            },
+            error: function (d)
+            {
+                
+                alert(d.responseText);
+            }
+        });    
+    }
+    function dataBind(r) {
+        $.map(r.data, function (d) {
+            
+            var arr = { point: "" + d.Longitude + "|" + d.Latitude };
+            markerArr.push(arr);
+        });
+        addMarker();
+    }
+
+</script>
+ <body>
+  <input type="button" value="搜索" id="btnSearch"/>
+ </body>
+</html>
+```
+
+## 三、在小程序中使用echarts组件
+
+### 1. 实现方法
+
+1. 下载 GitHub 上的 ecomfe/echarts-for-weixin 项目，下载后将ec-canvas文件夹复制到小程序项目中，假设放在根目录下utils文件夹中。
+
+2. 在要实现echarts图的页面引入echarts.js文件，例如要在index页面中展现echarts图的话，就在index.js文件中引入。
+
+   `import * as echarts from '../../utils/ec-canvas/echarts';`
+
+3. 在index.json中设置使用组件组件。
+
+```
+{
+	"usingComponents": {
+		"ec-canvas": "../../utils/ec-canvas/ec-canvas"
+	}
+}
+```
+
+4. 在index.wxml中使用组件<ec-canvas>
+
+```
+<view class='radar' style="width: 500rpx; height: 500rpx;">
+	<ec-canvas id="mychart-dom-radar" canvas-id='mychart-line' ec="{{ec}}"></ec-canvas>
+</view>
+```
+
+5. 在index.js中实现echarts具体设置，具体设置可参考echarts配置项手册和官方实例
+
+```
+function getOption(xData, data_cur, data_his) {
+  var option = {
+    backgroundColor: "#f5f4f3",
+    color: ["#37A2DA", "#f2960d", "#67E0E3", "#9FE6B8"],
+    title: {
+      text: '温度变化',
+      textStyle: {
+        fontWeight: '500',
+        fontSize: 15,
+        color: '#000'
+      },
+      x:'center',
+      y:'0'
+    },
+    legend: {
+      data: ['今日'],
+      right: 10
+    },
+    grid: {
+      top: '15%',
+      left: '1%',
+      right: '3%',
+      bottom: '60rpx',
+      containLabel: true
+    },
+    tooltip: {
+      show: true,
+      trigger: 'axis'
+    },
+    xAxis: {
+      type: 'time',
+      boundaryGap: false,
+      data: xData||[],
+      axisLabel: {
+        interval: 11,
+        formatter: function (value, index) {
+          return value.substring(0, 2) * 1;
+        },
+        textStyle: {
+          fontsize: '10px'
+        }
+      }
+    },
+    yAxis: {
+      x: 'center',
+      name: 'C',
+      type: 'value',
+      min: 0,
+      max: 40,
+    },
+    series: [{
+      name: '今日',
+      zIndex:2,
+      type: 'line',
+      smooth: true,
+      symbolSize: 0,
+      data: data_cur||[]
+    }
+    }]
+  };
+  return option;
+}
+```
+
+6. 页面page中的data初始化
+
+```
+let chartLine;
+Page({
+    data: {
+        ecLine: {
+            onInit: function (canvas, width, height){
+                //初始化echarts元素，绑定到全局变量，方便更改数据
+                chartLine = echarts.init(canvas, null, {
+                    width: width,
+                    height: height
+                });
+                canvas.setChart(chartLine);
+
+                //可以先不setOption，等数据加载好后赋值，
+                //不过那样没setOption前，echats元素是一片空白，体验不好。
+                var xData = arrayTime(5).slice(100);
+                var option = getOption(xData);
+                chartLine.setOption(option);
+            }
+        }
+    }
+})
+```
+
+7. 将建立的echats对象绑定到echarts元素中
+
+```
+<view class="echart_panel">
+  <ec-canvas ec="{{ ecLine }}"></ec-canvas>
+</view>
+```
+
+8. 然后就可以在数据加载后，给图表赋值option了，或者是重新setOption的数据
+
+```
+ //ajax请求好数据后，调用获取option函数，传一些数据，
+//然后用全局变量echarts元素chartLine 来 setOption即可。
+var option = getOption(xData, data_cur, data_his);
+chartLine.setOption(option);
+//如果上面初始化时候，已经chartLine已经setOption了，
+//那么建议不要重新setOption，官方推荐写法，重新赋数据即可。
+chartLine.setOption({
+    xAxis: {
+        data: xData
+    }, 
+    series: [{
+        data: data_cur
+    }, {
+        data: data_his
+    }]
+});  
+```
+
+   
 
 # Day 4
 
 
 
-## a.设计二维码
+## 一、设计二维码
 
-## 参阅
+### 1. 参阅
 
 https://cli.im/ - 草料二维码
 
 
 
-## b.获取位置信息
+## 二、获取位置信息
 
-## 目标
+### 1. 目标
 
-1. 完成对地图接口的调用，返回相关的调用结果
+#### 1.1. 完成对地图接口的调用，返回相关的调用结果
 
-## 实现介绍
+### 2. 实现介绍
 
 > 本实例中使用高德地图的API https://lbs.amap.com/
 
@@ -967,14 +1290,14 @@ https://cli.im/ - 草料二维码
 
 
 
-## c.扫描获取二维码中的信息
+## 三、扫描获取二维码中的信息
 
-## 目标
+### 1. 目标
 
-1. 在小程序中使用扫描获取二维码包含的信息
-2. 将获取的二维码信息和位置信息发送给后端
+#### 1.1. 在小程序中使用扫描获取二维码包含的信息
+#### 1.2. 将获取的二维码信息和位置信息发送给后端
 
-## 实现介绍
+### 2. 实现介绍
 
 使用 `wx.scanCode` 方法调起客户端扫码界面进行扫码
 
@@ -1003,16 +1326,16 @@ https://cli.im/ - 草料二维码
 
 
 
-## d.后端接收保存数据
+## 四、后端接收保存数据
 
-## 目标
+### 1. 目标
 
-1. 接收前端发送的数据请求
-2. 将数据保存在数据库中
+#### 1.1. 接收前端发送的数据请求
+#### 1.2. 将数据保存在数据库中
 
-## 实现介绍
+### 2. 实现介绍
 
-1. 创建相应数据库（mongoDB）
+#### 2.1. 创建相应数据库（mongoDB）
 
    > 这里创建数据库与集合用来存储前端传回的信息
 
@@ -1021,7 +1344,7 @@ use weather
 db.createCollection("user")
 ```
 
-2. 设计接口（后端使用 ThinkJS 实现）
+#### 2.2. 设计接口（后端使用 ThinkJS 实现）
 
    test.js
 
@@ -1045,7 +1368,7 @@ db.createCollection("user")
    
    ```
 
-   3.效果图（数据库中前端发送的数据）
+#### 2.3.效果图（数据库中前端发送的数据）
 
    ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/db-test.png)
 
