@@ -471,7 +471,7 @@ db.createCollection("user")
 
    3.效果图（数据库中前端发送的数据）
 
-   ![avatar](image/db-test.png)
+   ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/db-test.png)
 
 **代码样例：**
 
