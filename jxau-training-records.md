@@ -1,28 +1,121 @@
-﻿# Day1
-## A 搭建Mongodb环境并建立表存储温度数据
-#### 搭建环境：Ubuntu 18.04
+- [Day1](#day1)
+    - [一、搭建Mongodb环境并建立表存储温度数据](#一搭建mongodb环境并建立表存储温度数据)
+        - [1.搭建环境：Ubuntu 18.04](#1-搭建环境ubuntu-1804)
+            - [1.1.安装下载](#11-安装下载)
+            - [1.2.启动服务](#12-启动服务)
+            - [1.3.登陆客户端](#13-登陆客户端)
+            - [1.4.建立demo数据库并在其中添加存有温度信息的表](#14-建立demo数据库并在其中添加存有温度信息的表)
+        - [2. 下载地址](#2-下载地址)
+        - [3. 具体安装流程参考](#3-具体安装流程参考)
+    - [二、搭建三个节点的分布式数据库](#二搭建三个节点的分布式数据库)
+        - [1. 端口分配](#1-端口分配)
+        - [2. 搭建流程](#2-搭建流程)
+            - [2.1. 搭建config集群](#21-搭建config集群)
+        - [3. 测试Mongodb数据库性能](#3-测试mongodb数据库性能)
+            - [3.1. 对刚搭建好的数据库进行测试](#31-对刚搭建好的数据库进行测试)
+- [Day2](#day2)
+    - [一、参考](#一参考)
+        - [1. thinkjs框架](#1-thinkjs框架)
+        - [2. 物流模拟](#2-物流模拟)
+    - [二、后端服务](#二后端服务)
+        - [1. 框架选择](#1-框架选择)
+    - [三、搭建一个后端项目](#三搭建一个后端项目)
+        - [1. Thinkjs](#1-thinkjs)
+            - [1.1. 安装环境](#11-安装环境)
+            - [1.2. 创建项目](#12-创建项目)
+        - [2. flask](#2-flask)
+            - [2.1. 安装下载](#21-安装下载)
+            - [2.2. 启动程序](#22-启动程序)
+    - [四、实现后端项目与mongodb连接](#四实现后端项目与mongodb连接)
+        - [1. Thinkjs](#1-thinkjs)
+            - [1.1. 让框架支持mongdb](#11-让框架支持mongdb)
+            - [1.2. 创建mongodb](#12-创建mongodb)
+            - [1.3. 连接mongodb](#13-连接mongodb)
+        - [2. flask](#2-flask)
+            - [2.1. 配置环境](#21-配置环境)
+            - [2.2. 实例化数据库](#22-实例化数据库)
+    - [五、通过后端实现对mongodb的CURD操作](#五通过后端实现对mongodb的curd操作)
+        - [1. Thinkjs](#1-thinkjs)
+            - [1.1. 添加路由](#11-添加路由)
+            - [1.2. 修改初始页面](#12-修改初始页面)
+            - [1.3. thinkjs 对 mongdb 的 CURD](#13-thinkjs-对-mongdb-的-curd)
+            - [1.4. thinkjs 特定 CURD 封装](#14-thinkjs-特定-curd-封装)
+        - [2. flask](#2-flask)
+            - [2.1. 添加路由](#21-添加路由)
+            - [2.2. flask 对 mongo 的 CURD](#22-flask-对-mongo-的-curd)
+    - [六、使用小程序获取地理位置的Api](#六使用小程序获取地理位置的api)
+        - [1. 小程序获取位置信息](#1-小程序获取位置信息)
+            - [1.1. 实现流程](#11-实现流程)
+            - [1.2. 实现方法](#12-实现方法)
+        - [2. 小程序调用高德地图api获取地理位置信息](#2-小程序调用高德地图api获取地理位置信息)
+            - [2.1. 实现流程](#21-实现流程)
+            - [2.2. 实现方法](#22-实现方法)
+                - [2.2.1. 获取key](#221-获取key)
+                - [2.2.2. 配置项目](#222-配置项目)
+                - [2.2.3. 调用api 获取数据](#223-调用api-获取数据)
+    - [七、编写地理信息存储Api](#七编写地理信息存储api)
+    - [八、小程序中整合二维码扫描功能](#八小程序中整合二维码扫描功能)
+    - [九、传递数据到后端](#九传递数据到后端)
+        - [1. 生成一个二维码](#1-生成一个二维码)
+    - [十、后端对个人信息数据进行接收，存储到数据库中](#十后端对个人信息数据进行接收存储到数据库中)
+- [Day 3](#day-3)
+    - [一、微信小程序调用地图api](#一微信小程序调用地图api)
+        - [1. 准备工作](#1-准备工作)
+        - [2. 环境配置](#2-环境配置)
+        - [3. 实现方法](#3-实现方法)
+    - [二、百度地图获取数据库表中信息的坐标显示在地图上](#二百度地图获取数据库表中信息的坐标显示在地图上)
+        - [1. index.js代码](#1-indexjs代码)
+        - [2. 获取数据库数据](#2-获取数据库数据)
+    - [三、在小程序中使用echarts组件](#三在小程序中使用echarts组件)
+        - [1. 实现方法](#1-实现方法)
+- [Day 4](#day-4)
+    - [一、设计二维码](#一设计二维码)
+        - [1. 参阅](#1-参阅)
+    - [二、获取位置信息](#二获取位置信息)
+        - [1. 目标](#1-目标)
+            - [1.1. 完成对地图接口的调用，返回相关的调用结果](#11-完成对地图接口的调用返回相关的调用结果)
+        - [2. 实现介绍](#2-实现介绍)
+    - [三、扫描获取二维码中的信息](#三扫描获取二维码中的信息)
+        - [1. 目标](#1-目标)
+            - [1.1. 在小程序中使用扫描获取二维码包含的信息](#11-在小程序中使用扫描获取二维码包含的信息)
+            - [1.2. 将获取的二维码信息和位置信息发送给后端](#12-将获取的二维码信息和位置信息发送给后端)
+        - [2. 实现介绍](#2-实现介绍)
+    - [四、后端接收保存数据](#四后端接收保存数据)
+        - [1. 目标](#1-目标)
+            - [1.1. 接收前端发送的数据请求](#11-接收前端发送的数据请求)
+            - [1.2. 将数据保存在数据库中](#12-将数据保存在数据库中)
+        - [2. 实现介绍](#2-实现介绍)
+            - [2.1. 创建相应数据库（mongoDB）](#21-创建相应数据库mongodb)
+            - [2.2. 设计接口（后端使用 ThinkJS 实现）](#22-设计接口后端使用-thinkjs-实现)
+            - [2.3. 效果图（数据库中前端发送的数据）](#23-效果图数据库中前端发送的数据)
 
-#### 安装下载
+
+# Day1
+
+## 一、搭建Mongodb环境并建立表存储温度数据
+### 1. 搭建环境：Ubuntu 18.04
+
+#### 1.1. 安装下载
       sudo apt-get install mongodb
-#### 启动服务
+#### 1.2. 启动服务
       mongod
-#### 登陆客户端
+#### 1.3. 登陆客户端
       mongo
-#### 建立demo数据库并在其中添加存有温度信息的表
+#### 1.4. 建立demo数据库并在其中添加存有温度信息的表
      use demo
      db.createCollection("tmp")
      db.tmp.insert({place:‘placeA’,tmp:20,time:20190901.0700})
      db.tmp.insert({place:‘placeA’,tmp:30,time:20190901.1200})
      db.tmp.insert({place:‘placeA’,tmp:24,time:20190901.2300})
 
-#### 下载地址
+### 2. 下载地址
  https://robomongo.org/down
-#### 具体安装流程参考
+### 3. 具体安装流程参考
  https://www.jianshu.com/p/2a76fb6e4f8b
 
-## C 搭建三个节点的分布式数据库
+## 二、搭建三个节点的分布式数据库
 
-#### 端口分配
+### 1. 端口分配
      27018：config server（master）
      27019：config server（slave）
      27020：config arbiter
@@ -42,8 +135,8 @@
     shard和shard2集群：存放实际数据的集群，其中,slave和arbiter分片为备用分片，当master分片运行异常时启动
     router节点：路由节点挂，在该节点下插入的数据将依照相应的分片规则自动分配在该节点下注册过的集群中
 
-#### 搭建流程
-- 搭建config集群
+### 2. 搭建流程
+#### 2.1. 搭建config集群
 ~~~
 1.新建文件夹在该文件下添加config集群的文件夹和相关配置文件
 2.在配置文件中写入如下代码，以confiMaster.conf为例子
@@ -120,9 +213,9 @@ for(i=1,i<=1000,i++){db.t.insert({id:i,name:"Lihua"})}
 登陆shard_master节点和shard2_master节点进行验证
 db.t.count()
 ~~~
-#### mongodb分布式数据库搭建完成
+**mongodb分布式数据库搭建完成**
 
-## D测试Mongodb数据库性能
+### 3. 测试Mongodb数据库性能
 - 测试工具
 - mongo-mload
 - 下载地址
@@ -150,7 +243,7 @@ https://github.com/eshujiushiwo/mongo-mload
       --geo          是否进行空间地理数据的测试（默认false, 即普通查询和索引；true 则使用经纬度类型数据进行查询）
       --geofield          空间地理查询测试使用的2d sphere字段名称（默认 loc）
   
-#### 对刚搭建好的数据库进行测试
+#### 3.1. 对刚搭建好的数据库进行测试
 - 插入测试
 ~~~
 清理数据库
@@ -190,26 +283,28 @@ go run mload.go --host 127.0.0.1 --datanum 1 --procnum 10 --operation update
 
 # Day2
 
-### 参考
+## 一、参考
 
-##### thinkjs框架
+### 1. thinkjs框架
 
 https://thinkjs.org/doc/index.html
 
-# 后端服务
+### 2. 物流模拟
 
-### 框架选择
+https://www.jianshu.com/p/e232c3c9af37
+
+## 二、后端服务
+
+### 1. 框架选择
 
 - python + Thinkjs + mongodb
 - python + flask + mongodb
 
-## A 搭建一个后端项目
+## 三、搭建一个后端项目
 
-------
+### 1. Thinkjs
 
-### Thinkjs
-
-#### 安装环境
+#### 1.1. 安装环境
 
 - 安装Node.js
 
@@ -242,7 +337,7 @@ https://thinkjs.org/doc/index.html
 
       `$ npm uninstall -g thinkjs`
 
-#### 创建项目
+#### 1.2. 创建项目
 
 - 在项目目录的终端下创建项目
 
@@ -276,11 +371,11 @@ https://thinkjs.org/doc/index.html
 
 ------
 
-### flask
+### 2. flask
 
 - 为了操作方便，使用pycharm
 
-#### 安装下载
+#### 2.1. 安装下载
 
 - 安装flask连接mongodb专用包工具
 
@@ -296,22 +391,18 @@ https://thinkjs.org/doc/index.html
       # 导入第三方包flask_pymongo,连接mongodb
   ```
 
-#### 启动程序
+#### 2.2. 启动程序
 
 ```
         if name == 'main':
             app.run(debug = True)
 ```
 
-------
+## 四、实现后端项目与mongodb连接
 
-## B 实现后端项目与mongodb连接
+### 1. Thinkjs
 
-------
-
-### Thinkjs
-
-#### 让框架支持mongdb
+#### 1.1. 让框架支持mongdb
 
 - 安装 ***think-mongo*** 模块
 
@@ -327,7 +418,7 @@ https://thinkjs.org/doc/index.html
       ]
   ```
 
-#### 创建mongodb
+#### 1.2. 创建mongodb
 
 - 在项目 ***根目录*** 下新建 ***db*** 目录，用于存放数据
 
@@ -343,7 +434,7 @@ https://thinkjs.org/doc/index.html
 
   - 以后也要在此目录下开启服务，否则后台连接不上服务器
 
-#### 连接mongodb
+#### 1.3. 连接mongodb
 
 - 修改 ***config*** 目录下的 ***adapter.js*** 文件
 
@@ -351,39 +442,31 @@ https://thinkjs.org/doc/index.html
 
 ------
 
-### flask
+### 2. flask
 
-#### 配置环境
+#### 2.1. 配置环境
 
-```
-​```
-    app = Flask(__name__)
-    app.config['MONGO_URI'] = "mongodb://127.0.0.1:27017/db_name"
-    # 实例化数据库配置，可以直接一行解决
-​```
-```
 
-#### 实例化数据库
+        app = Flask(__name__)
+        app.config['MONGO_URI'] = "mongodb://127.0.0.1:27017/db_name"
+        # 实例化数据库配置，可以直接一行解决
 
-```
-​```
-    mongo = PyMongo(app)
-​```
-```
 
-------
+#### 2.2. 实例化数据库
 
-## C 通过后端实现对mongodb的CURD操作
+   
+        mongo = PyMongo(app)
+​
 
-------
+## 五、通过后端实现对mongodb的CURD操作
 
-### Thinkjs
+### 1. Thinkjs
 
-#### 添加路由
+#### 1.1. 添加路由
 
 - 在 ***controller*** 目录下
 
-##### 修改初始页面
+#### 1.2. 修改初始页面
 
 - ***index.js*** 文件 修改返回值
 
@@ -395,11 +478,11 @@ https://thinkjs.org/doc/index.html
       };
   ```
 
-#### thinkjs 对 mongdb 的 CURD
+#### 1.3. thinkjs 对 mongdb 的 CURD
 
 https://thinkjs.org/zh-cn/doc/2.2/model_crud.html
 
-#### thinkjs 特定 CURD 封装
+#### 1.4. thinkjs 特定 CURD 封装
 
 https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
@@ -424,6 +507,8 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
     
         module.exports = class extends Base {
             async indexAction() {
+                // 接收post请求传递的数据
+                const bbb = this.post('request上传的key')
                 // controller 中实例化模型 并调用自定义方法
                 const user = await this.mongo('user').aaa();
                 if (think.isEmpty(user)) {
@@ -437,9 +522,9 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ------
 
-### flask
+### 2. flask
 
-#### 添加路由
+#### 2.1. 添加路由
 
 - 添加根页面api
 
@@ -453,7 +538,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
    
   ```
 
-#### flask 对 mongo 的 CURD
+#### 2.2. flask 对 mongo 的 CURD
 
 - 增
 
@@ -517,53 +602,769 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
   ```
 
 ------
+------
+
+
+## 六、使用小程序获取地理位置的Api
+
+### 1. 小程序获取位置信息
+
+#### 1.1. 实现流程
+
++ 获取权限
+
+    >可以使用 ***wx.authorize*** 在调用需授权 API 之前，提前向用户发起授权请求。 这里没有
+
++ 获取地理位置信息
+
++ 根据获取到的数据，打开地图
+
+
+#### 1.2. 实现方法
+
++ 在 ***app.json*** 中配置
+
+    ```
+            "permission": {
+                "scope.userLocation": {
+                "desc": "你的位置信息将用于小程序位置接口的效果展示"
+                }
+            },
+    ```
+
+    ![](./image/mnp_getSetting_1.png)
+
++ 在 ***xxx.js*** 中 配置
+
+    + 在用户首次进入某页面（需要地理位置授权）时候，在页面进行 ***onLoad***，***onShow*** 时候，进行调用 ***wx.getLocation*** 要求用户进行授权；以后每次进入该页面时，通过 ***wx.getSetting*** 接口，返回用户授权具体信息。
+
+    + 当该标志是 ***underfind***，表示用户初次进入该页面，当该标志是 ***false***，表示用户初次进入该页面拒绝了地理授权，应进行重新要求获取授权。
+
+        ![](./image/mnp_getSetting_2.png)
+
+    + 配置代码如下
+
+        ```
+            data: {
+                location:{}
+
+            /**
+            * 生命周期函数--监听页面加载
+            */
+            onLoad: function (options) {
+                wx.getSetting({
+                success: (res) => {
+                    console.log(JSON.stringify(res))
+                    // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
+                    // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
+                    // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
+                    if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
+                        wx.showModal({
+                            title: '请求授权当前位置',
+                            content: '需要获取您的地理位置，请确认授权',
+                            success: function (res) {
+                            if (res.cancel) {
+                                wx.showToast({
+                                title: '拒绝授权',
+                                icon: 'none',
+                                duration: 1000
+                                })
+                            } else if (res.confirm) {
+                                wx.openSetting({
+                                    success: function (dataAu) {
+                                        if (dataAu.authSetting["scope.userLocation"] == true) {
+                                        wx.showToast({
+                                            title: '授权成功',
+                                            icon: 'success',
+                                            duration: 1000
+                                        })
+                                        //再次授权，调用wx.getLocation的API
+
+                                        } else {
+                                            wx.showToast({
+                                                title: '授权失败',
+                                                icon: 'none',
+                                                duration: 1000
+                                            })
+                                        }
+                                    }
+                                })
+                            }
+                            }
+                        })
+                    } else if (res.authSetting['scope.userLocation'] == undefined) {
+                    //调用wx.getLocation的API
+                    wx.getLocation({
+                        success: res => {
+                            console.log(res);
+                            this.setData({
+                                location: res,
+                            })
+                            //console.log(app.globalData.location);
+                        }
+                    })
+                    }
+                    else {
+                    //调用wx.getLocation的API
+                    wx.getLocation({
+                        success: res => {
+                        console.log(res);
+                        this.setData({
+                            location: res,
+                        })
+                        }
+                    })
+                    }
+                }
+                })
+            },
+        ```
+    + 设置函数打开地图
+
+        ```
+                openmap : function(){
+                wx.openLocation({
+                latitude: this.data.location.latitude,
+                longitude: this.data.location.longitude,
+                scale: 18,
+                name:'位置名',
+                address: '地址详情'
+                })
+            }
+        ```
+
+    + 实现效果
+
+        ![](./image/mnp_openmap.png)
 
 ------
 
-# 物流模拟
+### 2. 小程序调用高德地图api获取地理位置信息
 
-## D 编写地理信息存储Api
+> 微信小程序的接口，只能得到经纬度，但有时候我们需要得到具体的城市或者区域信息，这就需要借助高德地图了（或者腾讯地图等，逻辑都是一样的，但百度时间多可以试试）。
 
-​    
+> 参考 高德 https://lbs.amap.com/api/wx/gettingstarted
 
-## E 使用小程序获取地理位置的Api
+#### 2.1. 实现流程
 
-## F 小程序中整合二维码扫描功能
++ 注册开发者
++ 获取key
++ 配置项目
+    + 设置安全通讯域名
+    + 下载api 
++ 调用api 获取数据
+    + POI数据
+    + 地址描述数据
+    + 实时天气数据
 
-## G 生成一个二维码保存自己的信息（姓名、学号等）扫码后发送post请求保存这些数据
+#### 2.2. 实现方法
 
-## H 后端对个人信息数据进行接收，存储到数据库中
+##### 2.2.1. 获取key
+
++ 进入控制台，创建新项目
+
+    ![](./image/mnp_amap_1.png)
+
++ 添加新key
+
+    ![](./image/mnp_amap_2.png)
+
++ 勾选后，在刚创建的项目下即可看到key
+
+    ![](./image/mnp_amap_3.png)
+
+##### 2.2.2. 配置项目
+
++ 设置安全通讯域名
+
+    > 为了保证高德小程序 SDK 中提供的功能的正常使用，需要设置安全域名。
+
+    + 登录微信公众平台(https://mp.weixin.qq.com/)，在 "设置"－>"开发设置" 中设置 ***request*** 合法域名，将 ***https://restapi.amap.com*** 中添加进去
+
+        ![](./image/mnp_amap_config_3.png)
+
+    + 测试环境下
+
+        + 开发者工具 - 详情 - 本地设置 - 勾选 不校验
+
+        ![](./image/mnp_amap_config_2.png)
+
++ 下载api https://lbs.amap.com/api/wx/download
+  
+    + 将解压后得到的 ***amap-wx.js*** 文件拷贝至 项目新建目录 ***libs*** 下
+
+        ![](./image/mnp_amap_config_1.png)
+
+##### 2.2.3. 调用api 获取数据
+
++ ***wxml*** 中使用<map></map>组件渲染地图
+
++ 在调用api的页面目录下的 ***xxx.js*** 文件中 引用 ***amap-wx.js***
+
+    ```
+        var amapFile = require('../../libs/amap-wx.js');
+    ```
++ 实例化 ***AMapWX*** 对象
+
+        ```
+            var markersData = []; // 实例化AMapWX 对象
+        ```
+
++ 为保证 ***marker*** 以自定义的图标显示，需在项目中新建 ***img*** 目录，并将 ***marker*** 对应的图标拷贝到项目的本地的 ***img*** 目录中，同时在 ***xxx.js*** 添加以下代码：
+
+    ```
+        Page({
+        data: {
+
+        },
+        makertap: function(e) {
+            var id = e.markerId;
+            var that = this;
+            that.showMarkerInfo(markersData,id);
+            that.changeMarkerColor(markersData,id);
+        },
+        showMarkerInfo: function(data,i){
+            var that = this;
+            that.setData({
+            textData: {
+                name: data[i].name,
+                desc: data[i].address
+            }
+            });
+        },
+        changeMarkerColor: function(data,i){
+            var that = this;
+            var markers = [];
+            for(var j = 0; j < data.length; j++){
+            if(j==i){
+                data[j].iconPath = "选中 marker 图标的相对路径"; //如：..­/..­/img/marker_checked.png
+            }else{
+                data[j].iconPath = "未选中 marker 图标的相对路径"; //如：..­/..­/img/marker.png
+            }
+            markers.push(data[j]);
+            }
+            that.setData({
+            markers: markers
+            });
+        }
+
+        })
+    ```
+
++ 调用 ***getPoiAround*** 方法，获取 ***POI*** 数据。
+
+```
+    onLoad: function() {
+        var that = this;
+        var myAmapFun = new amapFile.AMapWX({key:'您的key'});
+        
+        // 调用getPoiAround方法，获取Poi数据
+        
+        myAmapFun.getPoiAround({
+        iconPathSelected: '选中 marker 图标的相对路径', //如：..­/..­/img/marker_checked.png
+        iconPath: '未选中 marker 图标的相对路径', //如：..­/..­/img/marker.png
+        success: function(data){
+            markersData = data.markers;
+            that.setData({
+            markers: markersData
+            });
+            that.setData({
+            latitude: markersData[0].latitude
+            });
+            that.setData({
+            longitude: markersData[0].longitude
+            });
+            that.showMarkerInfo(markersData,0);
+        },
+        fail: function(info){
+            wx.showModal({title:info.errMsg})
+        }
+        })
+    },
+```
+
++ 获取返回值
+
+    ![](./image/mnp_amap_poi.png)
+
++ 调用 ***getRegeo*** 方法，获取 ***地址描述数据***
+
+    >onLoad 中
+
+    ```
+        myAmapFun.getRegeo({
+            success: function (data) {
+            //成功回调
+            console.log(data)
+            },
+            fail: function(info){
+            //失败回调 
+            console.log(info)
+            }
+        })
+
+    ```
+
+    + 获取返回值
+
+        ![](./image/mnp_amap_detail_1.png)
+        ![](./image/mnp_amap_detail_2.png)
+        ![](./image/mnp_amap_detail_3.png)
+    
++ 调用 ***getWeather*** 方法，获取 ***实时天气数据***
+
+    > onLoad 中
+    
+    ```
+        myAmapFun.getWeather({
+            success: function (data) {
+            //成功回调
+            console.log(data)
+            },
+            fail: function(info){
+            //失败回调
+            console.log(info)
+            }
+        })
+    ```
+    + 获取返回值
+
+        ![](./image/mnp_amap_weather.png)
+
+## 七、编写地理信息存储Api
+
+>   以从高德地图api的数据为例
+>   address latitude longitude name
+
+```
+    Page({
+        data:{
+            address:'', //地址
+            latitude:'',  //经度
+            longitude:'',  //纬度
+            name:''  // 名字
+        },
+        xxx: function () {
+            let that = this
+            wx.request({
+                //https 需要ssl 测试环境不加s
+                url: 'http://127.0.0.1:端口号/控制器名/函数名',
+                method: 'post',
+                data: {
+                    // 上传参数
+                    address:that.data.address,
+                    latitude:that.data.latitude,
+                    longitude:that.data.longitude,
+                    name:that.data.name
+                },
+                success(res) {
+                //成功回调函数
+                }
+            })
+        }
+    })
+    
+```
+
+## 八、小程序中整合二维码扫描功能
+
+> 官方文档： https://mp.weixin.qq.com/debug/wxadoc/dev/api/scancode.html
+
++ 扫码返回参数
+
+    + res.result   // 数据
+    + res.scanType // 二维码类型
+    + res.charSet  // 字符集
+    + res.path     // 路径
+
+```
+    Page({
+    data: {
+        show: {},
+    },
+    click: function () {
+        var that = this;
+        wx.scanCode({       // 调用扫码api
+            success: (res) => {
+                that.setData({
+                    show: res
+                })
+                wx.showToast({
+                    title: '成功',
+                    icon: 'success',
+                    duration: 2000
+                })
+            },
+            fail: (res) => {
+                wx.showToast({
+                    title: '失败',
+                    icon: 'success',
+                    duration: 2000
+                })
+            },
+            complete: (res) => {
+            }  
+        })
+    }
+    })
+
+```
+
+## 九、传递数据到后端
+
+### 1. 生成一个二维码
+
++ https://cli.im/ - 草料二维码
+
+扫码后 将数据post给后端
+参考 **7 - 编写地理信息存储API**
+
+## 十、后端对个人信息数据进行接收，存储到数据库中
+
+参考 **5.1.4 - thinkjs 特定 CURD 封装**
 
 ------
 
-### Thinkjs 
 
-#### 创建控制器
 
-- 在 ***controller*** 目录下 创建 相应 ***xxx.js*** 文件
-  - 自定义文件内容
+# Day 3
 
-------
+## 一、微信小程序调用地图api
+
+### 1. 准备工作
+
+   基本流程
+
+1. 注册账号
+2. 申请开发者密钥
+3. 下载SDK 
+
+百度地图开发者平台:http://lbsyun.baidu.com
+
+### 2. 环境配置
+
+1. 创建本地小程序项目
+
+2. 引入js模块
+
+   在根目录下创建一个路径，下载百度地图微信小程序JavaScriptAPI，解压后的文件中有 bmap-wx.js 文件(压缩版 bmap-wx.min.js )，将其拷贝到新建的路径下，安装完成。
+
+3. 请求合法域名
+
+   登录微信公众平台－> "设置" －> "开发设置" －> "request 合法域名" －>添加 api.map.baidu.com －> 点击"保存并提交"。
+
+### 3. 实现方法
+
+本案例使用百度地图的**地址解析API**
+
+**原理：** 
+
+1. 引用百度地图微信小程序JavaScript API 模块
+2. 在页面的onLoad中声明BMapWX对象
+3. 调用BMapWX.geocoding方法进行地址解析
+
+**参阅：**
+
+[百度地图地址解析](https://lbs.baidu.com/index.php?title=wxjsapi/guide/geocoding)
+
+
+
+## 二、百度地图获取数据库表中信息的坐标显示在地图上
+
+### 1. index.js代码
+
+```
+   //通用封装好的js:
+
+var map = new BMap.Map("container"); //建树Map实例
+var point = new BMap.Point(103.976032, 33.845509); // 建树点坐标
+map.centerAndZoom(point, 6); // 初始化地图,设置中心点坐标和地图级别。
+//地图事件设置函数：
+map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
+map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
+map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
+map.enableKeyboard(); //启用键盘上下左右键移动地图
+
+//向地图中添加缩放控件
+var ctrl_nav = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
+map.addControl(ctrl_nav);
+//向地图中添加缩略图控件
+var ctrl_ove = new BMap.OverviewMapControl({ anchor: BMAP_ANCHOR_BOTTOM_RIGHT, isOpen: 1 });
+map.addControl(ctrl_ove);
+//向地图中添加比例尺控件
+var ctrl_sca = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_BOTTOM_LEFT });
+map.addControl(ctrl_sca);
+//创建marker
+function addMarker() {
+    for (var i = 0; i < markerArr.length; i++) {
+        var json = markerArr[i];
+        var p0 = json.point.split("|")[0];
+        var p1 = json.point.split("|")[1];
+        var point = new BMap.Point(p0, p1);
+        
+        var iconImg = createIcon(json.icon);
+        var marker = new BMap.Marker(point, { icon: iconImg });
+        map.addOverlay(marker);
+    }
+}
+//创建一个Icon
+function createIcon(json) {
+    // 创建图标对象   
+        //var myIcon = new BMap.Icon("../marker_red_sprite.png", new BMap.Size(23, 25), {
+        //    // 指定定位位置。   
+        //    // 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+        //    // 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+        //    // 图标中央下端的尖角位置。    
+        //    offset: new BMap.Size(10, 25),    
+        //    // 设置图片偏移。   
+        //    // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+        //    // 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+        //    //imageOffset: new BMap.Size(0, 0 - index * 25)   // 设置图片偏移    
+        //});
+    var icon = new BMap.Icon(图片名称, new BMap.Size(json.w, json.h), { imageOffset: new BMap.Size(-json.l, -json.t), infoWindowOffset: new BMap.Size(json.lb + 5, 1), offset: new BMap.Size(json.x, json.h) })
+    return icon;
+}
+```
+
+### 2. 获取数据库数据
+
+```
+<html>
+ <head>
+  <title>百度地图加载</title>
+ </head>
+ <script src="Map.js"></script>
+ <script type="text/javascript"> 
+    
+    //声明全局数组
+    var markerArr = [];
+    $(function () {
+        //点击查询加载标注
+        $("#btnSearch").click(function () {
+            LoadMap();
+        });
+
+    });
+
+    //加载游客地理位置
+    function LoadMap() {
+       //清空数组和所有标注点
+        markerArr = [];
+        map.clearOverlays();
+        var par={
+            startDate:$("#startDate").val(),
+            endDate:$("#endDate").val()
+        }
+        $.ajax({
+            type: "get",
+            url: "/VisitorClient/GetAllInfo",
+            data: par,
+            dataType:"json",
+            cache: false,
+            success: function (r) {
+                if (r.res) { 
+                    dataBind(r);
+                    $("#spannum").text("该时段App园区游客人数为：" + r.count);
+                }
+                else {
+                    $("#spannum").text("该时段园区没有人使用App");
+                }
+                
+            },
+            error: function (d)
+            {
+                
+                alert(d.responseText);
+            }
+        });    
+    }
+    function dataBind(r) {
+        $.map(r.data, function (d) {
+            
+            var arr = { point: "" + d.Longitude + "|" + d.Latitude };
+            markerArr.push(arr);
+        });
+        addMarker();
+    }
+
+</script>
+ <body>
+  <input type="button" value="搜索" id="btnSearch"/>
+ </body>
+</html>
+```
+
+## 三、在小程序中使用echarts组件
+
+### 1. 实现方法
+
+1. 下载 GitHub 上的 ecomfe/echarts-for-weixin 项目，下载后将ec-canvas文件夹复制到小程序项目中，假设放在根目录下utils文件夹中。
+
+2. 在要实现echarts图的页面引入echarts.js文件，例如要在index页面中展现echarts图的话，就在index.js文件中引入。
+
+   `import * as echarts from '../../utils/ec-canvas/echarts';`
+
+3. 在index.json中设置使用组件组件。
+
+```
+{
+	"usingComponents": {
+		"ec-canvas": "../../utils/ec-canvas/ec-canvas"
+	}
+}
+```
+
+4. 在index.wxml中使用组件<ec-canvas>
+
+```
+<view class='radar' style="width: 500rpx; height: 500rpx;">
+	<ec-canvas id="mychart-dom-radar" canvas-id='mychart-line' ec="{{ec}}"></ec-canvas>
+</view>
+```
+
+5. 在index.js中实现echarts具体设置，具体设置可参考echarts配置项手册和官方实例
+
+```
+function getOption(xData, data_cur, data_his) {
+  var option = {
+    backgroundColor: "#f5f4f3",
+    color: ["#37A2DA", "#f2960d", "#67E0E3", "#9FE6B8"],
+    title: {
+      text: '温度变化',
+      textStyle: {
+        fontWeight: '500',
+        fontSize: 15,
+        color: '#000'
+      },
+      x:'center',
+      y:'0'
+    },
+    legend: {
+      data: ['今日'],
+      right: 10
+    },
+    grid: {
+      top: '15%',
+      left: '1%',
+      right: '3%',
+      bottom: '60rpx',
+      containLabel: true
+    },
+    tooltip: {
+      show: true,
+      trigger: 'axis'
+    },
+    xAxis: {
+      type: 'time',
+      boundaryGap: false,
+      data: xData||[],
+      axisLabel: {
+        interval: 11,
+        formatter: function (value, index) {
+          return value.substring(0, 2) * 1;
+        },
+        textStyle: {
+          fontsize: '10px'
+        }
+      }
+    },
+    yAxis: {
+      x: 'center',
+      name: 'C',
+      type: 'value',
+      min: 0,
+      max: 40,
+    },
+    series: [{
+      name: '今日',
+      zIndex:2,
+      type: 'line',
+      smooth: true,
+      symbolSize: 0,
+      data: data_cur||[]
+    }
+    }]
+  };
+  return option;
+}
+```
+
+6. 页面page中的data初始化
+
+```
+let chartLine;
+Page({
+    data: {
+        ecLine: {
+            onInit: function (canvas, width, height){
+                //初始化echarts元素，绑定到全局变量，方便更改数据
+                chartLine = echarts.init(canvas, null, {
+                    width: width,
+                    height: height
+                });
+                canvas.setChart(chartLine);
+
+                //可以先不setOption，等数据加载好后赋值，
+                //不过那样没setOption前，echats元素是一片空白，体验不好。
+                var xData = arrayTime(5).slice(100);
+                var option = getOption(xData);
+                chartLine.setOption(option);
+            }
+        }
+    }
+})
+```
+
+7. 将建立的echats对象绑定到echarts元素中
+
+```
+<view class="echart_panel">
+  <ec-canvas ec="{{ ecLine }}"></ec-canvas>
+</view>
+```
+
+8. 然后就可以在数据加载后，给图表赋值option了，或者是重新setOption的数据
+
+```
+ //ajax请求好数据后，调用获取option函数，传一些数据，
+//然后用全局变量echarts元素chartLine 来 setOption即可。
+var option = getOption(xData, data_cur, data_his);
+chartLine.setOption(option);
+//如果上面初始化时候，已经chartLine已经setOption了，
+//那么建议不要重新setOption，官方推荐写法，重新赋数据即可。
+chartLine.setOption({
+    xAxis: {
+        data: xData
+    }, 
+    series: [{
+        data: data_cur
+    }, {
+        data: data_his
+    }]
+});  
+```
+
+   
 
 # Day 4
 
 
 
-## a.设计二维码
+## 一、设计二维码
 
-## 参阅
+### 1. 参阅
 
 https://cli.im/ - 草料二维码
 
 
 
-## b.获取位置信息
+## 二、获取位置信息
 
-## 目标
+### 1. 目标
 
-1. 完成对地图接口的调用，返回相关的调用结果
+#### 1.1. 完成对地图接口的调用，返回相关的调用结果
 
-## 实现介绍
+### 2. 实现介绍
 
 > 本实例中使用高德地图的API https://lbs.amap.com/
 
@@ -579,14 +1380,14 @@ https://cli.im/ - 草料二维码
 
 
 
-## c.扫描获取二维码中的信息
+## 三、扫描获取二维码中的信息
 
-## 目标
+### 1. 目标
 
-1. 在小程序中使用扫描获取二维码包含的信息
-2. 将获取的二维码信息和位置信息发送给后端
+#### 1.1. 在小程序中使用扫描获取二维码包含的信息
+#### 1.2. 将获取的二维码信息和位置信息发送给后端
 
-## 实现介绍
+### 2. 实现介绍
 
 使用 `wx.scanCode` 方法调起客户端扫码界面进行扫码
 
@@ -615,16 +1416,16 @@ https://cli.im/ - 草料二维码
 
 
 
-## d.后端接收保存数据
+## 四、后端接收保存数据
 
-## 目标
+### 1. 目标
 
-1. 接收前端发送的数据请求
-2. 将数据保存在数据库中
+#### 1.1. 接收前端发送的数据请求
+#### 1.2. 将数据保存在数据库中
 
-## 实现介绍
+### 2. 实现介绍
 
-1. 创建相应数据库（mongoDB）
+#### 2.1. 创建相应数据库（mongoDB）
 
    > 这里创建数据库与集合用来存储前端传回的信息
 
@@ -633,7 +1434,7 @@ use weather
 db.createCollection("user")
 ```
 
-2. 设计接口（后端使用 ThinkJS 实现）
+#### 2.2. 设计接口（后端使用 ThinkJS 实现）
 
    test.js
 
@@ -657,24 +1458,27 @@ db.createCollection("user")
    
    ```
 
-   3.效果图（数据库中前端发送的数据）
+#### 2.3. 效果图（数据库中前端发送的数据）
 
    ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/db-test.png)
 
 **代码样例：**
 
 [index.js](https://github.com/xpcloud/map-miniprogram/blob/master/pages/index/index.js)
-# Day 5
-## **目标**
-#### a、实现拍照功能并且将图片传到后端
-#### b、熟悉是否微笑的相关检测并反馈给前端
-#### c、封装“微笑检测”为后端api
 
-## **实现**
-### a：根据微信的开发文档，想要使用微信的jssdk，需要5个步骤
-#### *1>绑定域名:先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”*
-#### *2>引入JS文件:在需要调用JS接口的页面引入如下JS文件，（支持https）：http://res.wx.qq.com/open/js/jweixin-1.2.0.js  支持使用 AMD/CMD 标准模块加载方法加载*
-#### *3>：通过config接口注入权限验证配置*
+# Day 5
+## 一、目标
+### 1. 实现拍照功能并且将图片传到后端
+### 2. 熟悉是否微笑的相关检测并反馈给前端
+### 3. 封装“微笑检测”为后端api
+
+## 二、实现
+### 1. 使用微信jssdk
+根据微信的开发文档，想要使用微信的jssdk，需要5个步骤
+#### 1.1. 绑定域名:先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”
+#### 1.2. 引入JS文件
+在需要调用JS接口的页面引入如下JS文件，（支持https）：http://res.wx.qq.com/open/js/jweixin-1.2.0.js  支持使用 AMD/CMD 标准模块加载方法加载
+#### 1.3. 通过config接口注入权限验证配置
 ```
 wx.config({
     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -685,13 +1489,13 @@ wx.config({
     jsApiList: [] // 必填，需要使用的JS接口列表
 });
 ```
-#### *4>通过ready接口处理成功验证*
+#### 1.4. 通过ready接口处理成功验证
 ```
 wx.ready(function(){
     // dosomething
 });
 ```
-* 拍照或从手机相册中选图接口
+ * 拍照或从手机相册中选图接口
 ```
 wx.chooseImage({
     count: 1, // 默认9
@@ -702,26 +1506,26 @@ wx.chooseImage({
     }
 });
 ```
-#### *5>通过error接口处理失败验证*
+#### 1.5. 通过error接口处理失败验证
 ```
 wx.error(function(res){
     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 });
 ```
-### b：微笑检测的实现
-#### *1、微笑检测大概流程*
+### 2. 微笑检测的实现
+#### 2.1. 微笑检测大概流程
 * 用深度学习技术做分类
 * 用OpenCV的级联分类器做人脸识别
-#### *2、数据介绍*
+#### 2.2. 数据介绍
 * 数据地址：https://github.com/hromi/SMILEsmileD
 * 数据包含13165张灰度图片，每张图片的尺寸是64*64。这个数据集并不算平衡，13165张图片中，有9475张图片不是笑脸图片，有3690张图片是笑脸图片。数据差异很大。
-#### *3、数据预处理*
+#### 2.3. 数据预处理
 *  导入相应的包
 *  解决样本不平衡问题
-#### *4、使用LeNet实现笑脸检测分类*
+#### 2.4. 使用LeNet实现笑脸检测分类
 * 模型实现
 * 输出结果
-#### *5、人脸检测实现*
+#### 2.5. 人脸检测实现
 ```
 from keras.preprocessing.image import img_to_array
 from keras.models import load_model
@@ -737,6 +1541,7 @@ video_dir = os.path.abspath(r"./src.mp4")
 detector = cv2.CascadeClassifier(haarcascade_face_dir)
 model = load_model(model_dir)
 camera = cv2.VideoCapture(video_dir)
+
 
 while True:
     (grabbed, frame) = camera.read()
@@ -780,10 +1585,10 @@ while True:
 camera.release()  # 清空相机
 cv2.destroyAllWindows()  # 关闭所有window
 ```
-### c：暂未实现
-## 参考：
+### 3. 暂未实现
+
+## 三、参考：
 * https://blog.csdn.net/weixin_36882413/article/details/80674565
 * https://blog.csdn.net/Einstellung/article/details/100078860 
-
 
 
