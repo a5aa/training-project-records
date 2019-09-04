@@ -149,7 +149,7 @@ https://github.com/eshujiushiwo/mongo-mload
       --clean		       是否清理数据(默认false，如果为true将drop数据库mongobench)
       --geo          是否进行空间地理数据的测试（默认false, 即普通查询和索引；true 则使用经纬度类型数据进行查询）
       --geofield          空间地理查询测试使用的2d sphere字段名称（默认 loc）
-     
+  
 #### 对刚搭建好的数据库进行测试
 - 插入测试
 ~~~
@@ -263,7 +263,7 @@ https://thinkjs.org/doc/index.html
 
   - 执行完成后，会在控制台下看见类似日志
 
-    ![avatar](image/thinkjs_log.png)
+    ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/thinkjs_log.png)
 
   - 验证创建完成
 
@@ -272,7 +272,7 @@ https://thinkjs.org/doc/index.html
 
   - Thinkjs框架默认项目结构
 
-    ![avatar](image/thinkjs_project_structure.png)
+    ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/thinkjs_project_structure.png)
 
 ------
 
@@ -347,7 +347,7 @@ https://thinkjs.org/doc/index.html
 
 - 修改 ***config*** 目录下的 ***adapter.js*** 文件
 
-  ![avatar](image/thinkjs_connet_mongo.png)
+  ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/thinkjs_connet_mongo.png)
 
 ------
 
