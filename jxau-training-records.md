@@ -263,7 +263,7 @@ https://thinkjs.org/doc/index.html
 
   - 执行完成后，会在控制台下看见类似日志
 
-    [外链图片转存失败(img-0pNFTDw7-1567578658104)(image/thinkjs_log.png)]
+    ![avatar](image/thinkjs_log.png)
 
   - 验证创建完成
 
@@ -272,7 +272,7 @@ https://thinkjs.org/doc/index.html
 
   - Thinkjs框架默认项目结构
 
-    [外链图片转存失败(img-9JXPjSlq-1567578658105)(image/thinkjs_project_structure.png)]
+    ![avatar](image/thinkjs_project_structure.png)
 
 ------
 
@@ -347,7 +347,7 @@ https://thinkjs.org/doc/index.html
 
 - 修改 ***config*** 目录下的 ***adapter.js*** 文件
 
-  [外链图片转存失败(img-r1gq2ENS-1567578658108)(image/thinkjs_connet_mongo.png)]
+  ![avatar](image/thinkjs_connet_mongo.png)
 
 ------
 
@@ -659,34 +659,7 @@ db.createCollection("user")
 
    3.效果图（数据库中前端发送的数据）
 
-   [外链图片转存失败(img-gp9KgmAx-1567578658110)(image/db-test.png)]
-
-**代码样例：**
-
-[index.js](https://github.com/xpcloud/map-miniprogram/blob/master/pages/index/index.js)
-
-
-
-
-
-
-               const a = await this.mongo('user').add(data);
-               console.log(a);
-               return this.success('success');
-       }
-   
-       async addAction() {
-               const test = 'hahaha';
-               return this.json({test});
-       }   
-       };
-
-   
-   ```
-
-   3.效果图（数据库中前端发送的数据）
-
-   [外链图片转存中...(img-gp9KgmAx-1567578658110)]
+   ![avatar](image/db-test.png)
 
 **代码样例：**
 
