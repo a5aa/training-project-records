@@ -5,8 +5,8 @@
             - [1.2.启动服务](#启动服务)
             - [1.3.登陆客户端](#登陆客户端)
             - [1.4.建立demo数据库并在其中添加存有温度信息的表](#建立demo数据库并在其中添加存有温度信息的表)
-        - [1.2. 下载地址](#112-下载地址)
-        - [1.3. 具体安装流程参考](#113-具体安装流程参考)
+        - [2. 下载地址](#112-下载地址)
+        - [3. 具体安装流程参考](#113-具体安装流程参考)
     - [二、搭建三个节点的分布式数据库](#二搭建三个节点的分布式数据库)
         - [1. 端口分配](#121-端口分配)
         - [2. 搭建流程](#122-搭建流程)
@@ -93,29 +93,29 @@
 # Day1
 
 ## 一、搭建Mongodb环境并建立表存储温度数据
-### 搭建环境：Ubuntu 18.04
+### 1. 搭建环境：Ubuntu 18.04
 
-#### 安装下载
+#### 1.1. 安装下载
       sudo apt-get install mongodb
-#### 启动服务
+#### 1.2. 启动服务
       mongod
-#### 登陆客户端
+#### 1.3. 登陆客户端
       mongo
-#### 建立demo数据库并在其中添加存有温度信息的表
+#### 1.4. 建立demo数据库并在其中添加存有温度信息的表
      use demo
      db.createCollection("tmp")
      db.tmp.insert({place:‘placeA’,tmp:20,time:20190901.0700})
      db.tmp.insert({place:‘placeA’,tmp:30,time:20190901.1200})
      db.tmp.insert({place:‘placeA’,tmp:24,time:20190901.2300})
 
-### 下载地址
+### 2. 下载地址
  https://robomongo.org/down
-### 具体安装流程参考
+### 3. 具体安装流程参考
  https://www.jianshu.com/p/2a76fb6e4f8b
 
 ## 二、搭建三个节点的分布式数据库
 
-### 端口分配
+### 1. 端口分配
      27018：config server（master）
      27019：config server（slave）
      27020：config arbiter
@@ -135,8 +135,8 @@
     shard和shard2集群：存放实际数据的集群，其中,slave和arbiter分片为备用分片，当master分片运行异常时启动
     router节点：路由节点挂，在该节点下插入的数据将依照相应的分片规则自动分配在该节点下注册过的集群中
 
-### 搭建流程
-#### 搭建config集群
+### 2. 搭建流程
+#### 2.1. 搭建config集群
 ~~~
 1.新建文件夹在该文件下添加config集群的文件夹和相关配置文件
 2.在配置文件中写入如下代码，以confiMaster.conf为例子
@@ -215,7 +215,7 @@ db.t.count()
 ~~~
 **mongodb分布式数据库搭建完成**
 
-### 测试Mongodb数据库性能
+### 3. 测试Mongodb数据库性能
 - 测试工具
 - mongo-mload
 - 下载地址
@@ -243,7 +243,7 @@ https://github.com/eshujiushiwo/mongo-mload
       --geo          是否进行空间地理数据的测试（默认false, 即普通查询和索引；true 则使用经纬度类型数据进行查询）
       --geofield          空间地理查询测试使用的2d sphere字段名称（默认 loc）
   
-#### 对刚搭建好的数据库进行测试
+#### 3.1. 对刚搭建好的数据库进行测试
 - 插入测试
 ~~~
 清理数据库
@@ -285,26 +285,26 @@ go run mload.go --host 127.0.0.1 --datanum 1 --procnum 10 --operation update
 
 ## 一、参考
 
-### thinkjs框架
+### 1. thinkjs框架
 
 https://thinkjs.org/doc/index.html
 
-### 物流模拟
+### 2. 物流模拟
 
 https://www.jianshu.com/p/e232c3c9af37
 
 ## 二、后端服务
 
-### 框架选择
+### 1. 框架选择
 
 - python + Thinkjs + mongodb
 - python + flask + mongodb
 
 ## 三、搭建一个后端项目
 
-### Thinkjs
+### 1. Thinkjs
 
-#### 安装环境
+#### 1.1. 安装环境
 
 - 安装Node.js
 
@@ -337,7 +337,7 @@ https://www.jianshu.com/p/e232c3c9af37
 
       `$ npm uninstall -g thinkjs`
 
-#### 创建项目
+#### 1.2. 创建项目
 
 - 在项目目录的终端下创建项目
 
@@ -371,11 +371,11 @@ https://www.jianshu.com/p/e232c3c9af37
 
 ------
 
-### flask
+### 2. flask
 
 - 为了操作方便，使用pycharm
 
-#### 安装下载
+#### 2.1. 安装下载
 
 - 安装flask连接mongodb专用包工具
 
@@ -391,7 +391,7 @@ https://www.jianshu.com/p/e232c3c9af37
       # 导入第三方包flask_pymongo,连接mongodb
   ```
 
-#### 启动程序
+#### 2.2. 启动程序
 
 ```
         if name == 'main':
@@ -400,9 +400,9 @@ https://www.jianshu.com/p/e232c3c9af37
 
 ## 四、实现后端项目与mongodb连接
 
-### Thinkjs
+### 1. Thinkjs
 
-#### 让框架支持mongdb
+#### 1.1. 让框架支持mongdb
 
 - 安装 ***think-mongo*** 模块
 
@@ -418,7 +418,7 @@ https://www.jianshu.com/p/e232c3c9af37
       ]
   ```
 
-#### 创建mongodb
+#### 1.2. 创建mongodb
 
 - 在项目 ***根目录*** 下新建 ***db*** 目录，用于存放数据
 
@@ -434,7 +434,7 @@ https://www.jianshu.com/p/e232c3c9af37
 
   - 以后也要在此目录下开启服务，否则后台连接不上服务器
 
-#### 连接mongodb
+#### 1.3. 连接mongodb
 
 - 修改 ***config*** 目录下的 ***adapter.js*** 文件
 
@@ -442,31 +442,31 @@ https://www.jianshu.com/p/e232c3c9af37
 
 ------
 
-### flask
+### 2. flask
 
-#### 配置环境
+#### 2.1. 配置环境
 
-   ```
+
         app = Flask(__name__)
         app.config['MONGO_URI'] = "mongodb://127.0.0.1:27017/db_name"
         # 实例化数据库配置，可以直接一行解决
-​   ```
 
-#### 实例化数据库
 
-   ```
+#### 2.2. 实例化数据库
+
+   
         mongo = PyMongo(app)
-​   ```
+​
 
 ## 五、通过后端实现对mongodb的CURD操作
 
-### Thinkjs
+### 1. Thinkjs
 
-#### 添加路由
+#### 1.1. 添加路由
 
 - 在 ***controller*** 目录下
 
-#### 修改初始页面
+#### 1.2. 修改初始页面
 
 - ***index.js*** 文件 修改返回值
 
@@ -478,11 +478,11 @@ https://www.jianshu.com/p/e232c3c9af37
       };
   ```
 
-#### thinkjs 对 mongdb 的 CURD
+#### 1.3. thinkjs 对 mongdb 的 CURD
 
 https://thinkjs.org/zh-cn/doc/2.2/model_crud.html
 
-#### thinkjs 特定 CURD 封装
+#### 1.4. thinkjs 特定 CURD 封装
 
 https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
@@ -522,9 +522,9 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ------
 
-### flask
+### 2. flask
 
-#### 添加路由
+#### 2.1. 添加路由
 
 - 添加根页面api
 
@@ -538,7 +538,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
    
   ```
 
-#### flask 对 mongo 的 CURD
+#### 2.2. flask 对 mongo 的 CURD
 
 - 增
 
@@ -607,9 +607,9 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ## 六、使用小程序获取地理位置的Api
 
-### 小程序获取位置信息
+### 1. 小程序获取位置信息
 
-#### 实现流程
+#### 1.1. 实现流程
 
 + 获取权限
 
@@ -620,7 +620,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 + 根据获取到的数据，打开地图
 
 
-#### 实现方法
+#### 1.2. 实现方法
 
 + 在 ***app.json*** 中配置
 
@@ -739,13 +739,13 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ------
 
-### 小程序调用高德地图api获取地理位置信息
+### 2. 小程序调用高德地图api获取地理位置信息
 
 > 微信小程序的接口，只能得到经纬度，但有时候我们需要得到具体的城市或者区域信息，这就需要借助高德地图了（或者腾讯地图等，逻辑都是一样的，但百度时间多可以试试）。
 
 > 参考 高德 https://lbs.amap.com/api/wx/gettingstarted
 
-#### 实现流程
+#### 2.1. 实现流程
 
 + 注册开发者
 + 获取key
@@ -757,9 +757,9 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
     + 地址描述数据
     + 实时天气数据
 
-#### 实现方法
+#### 2.2. 实现方法
 
-##### 获取key
+##### 2.2.1. 获取key
 
 + 进入控制台，创建新项目
 
@@ -773,7 +773,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
     ![](./image/mnp_amap_3.png)
 
-##### 配置项目
+##### 2.2.2. 配置项目
 
 + 设置安全通讯域名
 
@@ -795,7 +795,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
         ![](./image/mnp_amap_config_1.png)
 
-##### 调用api 获取数据
+##### 2.2.3. 调用api 获取数据
 
 + ***wxml*** 中使用<map></map>组件渲染地图
 
@@ -1012,7 +1012,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ## 九、传递数据到后端
 
-### 生成一个二维码
+### 1. 生成一个二维码
 
 + https://cli.im/ - 草料二维码
 
@@ -1031,7 +1031,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ## 一、微信小程序调用地图api
 
-### 准备工作
+### 1. 准备工作
 
    基本流程
 
@@ -1041,7 +1041,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 百度地图开发者平台:http://lbsyun.baidu.com
 
-### 环境配置
+### 2. 环境配置
 
 1. 创建本地小程序项目
 
@@ -1053,7 +1053,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
    登录微信公众平台－> "设置" －> "开发设置" －> "request 合法域名" －>添加 api.map.baidu.com －> 点击"保存并提交"。
 
-### 实现方法
+### 3. 实现方法
 
 本案例使用百度地图的**地址解析API**
 
@@ -1071,7 +1071,7 @@ https://thinkjs.org/zh-cn/doc/2.2/model_intro.html#toc-d84
 
 ## 二、百度地图获取数据库表中信息的坐标显示在地图上
 
-### index.js代码
+### 1. index.js代码
 
 ```
    //通用封装好的js:
@@ -1126,7 +1126,7 @@ function createIcon(json) {
 }
 ```
 
-### 获取数据库数据
+### 2. 获取数据库数据
 
 ```
 <html>
@@ -1196,7 +1196,7 @@ function createIcon(json) {
 
 ## 三、在小程序中使用echarts组件
 
-### 实现方法
+### 1. 实现方法
 
 1. 下载 GitHub 上的 ecomfe/echarts-for-weixin 项目，下载后将ec-canvas文件夹复制到小程序项目中，假设放在根目录下utils文件夹中。
 
@@ -1352,7 +1352,7 @@ chartLine.setOption({
 
 ## 一、设计二维码
 
-### 参阅
+### 1. 参阅
 
 https://cli.im/ - 草料二维码
 
@@ -1360,11 +1360,11 @@ https://cli.im/ - 草料二维码
 
 ## 二、获取位置信息
 
-### 目标
+### 1. 目标
 
-#### 完成对地图接口的调用，返回相关的调用结果
+#### 1.1. 完成对地图接口的调用，返回相关的调用结果
 
-### 实现介绍
+### 2. 实现介绍
 
 > 本实例中使用高德地图的API https://lbs.amap.com/
 
@@ -1382,12 +1382,12 @@ https://cli.im/ - 草料二维码
 
 ## 三、扫描获取二维码中的信息
 
-### 目标
+### 1. 目标
 
-#### 在小程序中使用扫描获取二维码包含的信息
-#### 将获取的二维码信息和位置信息发送给后端
+#### 1.1. 在小程序中使用扫描获取二维码包含的信息
+#### 1.2. 将获取的二维码信息和位置信息发送给后端
 
-### 实现介绍
+### 2. 实现介绍
 
 使用 `wx.scanCode` 方法调起客户端扫码界面进行扫码
 
@@ -1418,14 +1418,14 @@ https://cli.im/ - 草料二维码
 
 ## 四、后端接收保存数据
 
-### 目标
+### 1. 目标
 
-#### 接收前端发送的数据请求
-#### 将数据保存在数据库中
+#### 1.1. 接收前端发送的数据请求
+#### 1.2. 将数据保存在数据库中
 
-### 实现介绍
+### 2. 实现介绍
 
-#### 创建相应数据库（mongoDB）
+#### 2.1. 创建相应数据库（mongoDB）
 
    > 这里创建数据库与集合用来存储前端传回的信息
 
@@ -1434,7 +1434,7 @@ use weather
 db.createCollection("user")
 ```
 
-#### 设计接口（后端使用 ThinkJS 实现）
+#### 2.2. 设计接口（后端使用 ThinkJS 实现）
 
    test.js
 
@@ -1458,15 +1458,11 @@ db.createCollection("user")
    
    ```
 
-#### 效果图（数据库中前端发送的数据）
+#### 2.3. 效果图（数据库中前端发送的数据）
 
    ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/db-test.png)
 
 **代码样例：**
 
 [index.js](https://github.com/xpcloud/map-miniprogram/blob/master/pages/index/index.js)
-
-
-
-
 
