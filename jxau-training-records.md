@@ -377,24 +377,17 @@ https://cli.im/ - 草料二维码
 
 ## 实现介绍
 
-> 本实例中使用百度地图的API http://lbsyun.baidu.com/
+> 本实例中使用高德地图的API https://lbs.amap.com/
 
-有关小程序调用 API 部分，请参考官方文档 http://lbsyun.baidu.com/index.php?title=wxjsapi
+有关小程序调用 API 部分，请参考官方文档 https://lbs.amap.com/api/wx/summary/
 
-本实例中使用了天气查询功能
+本案例使用高德地图 API 获取经纬度
 
-添加给定的代码到小程序中，返回一串json格式的值给客户端
+在页面加载函数 onLoad 中实例化 AMapWX 对象
 
-```
-{weatherData: "城市：深圳市
- 			  PM2.5：27
- 			  日期：周二 09月03日 (实时：29℃)
- 			  温度：31 ~ 26℃
- 			  天气：阵雨
- 			  风力：无持续风向微风", 
- allresult: "", 
- __webviewId__: 0}
-```
+调用 getPoiAround 方法， 获取 POI 数据
+
+在 success 回调函数中把**经纬度**添加到全局变量中
 
 
 
@@ -422,9 +415,9 @@ https://cli.im/ - 草料二维码
 | :----: | :----------: |
 | result | 所扫码的内容 |
 
-获取到二维码信息后，定义一个全局列表变量 `allresult : {}`
+定义一个全局列表变量 `allresult : ` ' '
 
-将它与位置信息一起添加到 `allresult` 
+获取到二维码信息后，将它与位置信息一起添加到 `allresult` 
 
 扫码成功后发起请求，在 `wx.scanCode` 的  `success` 回调函数内添加 `wx.request` 方法
 
@@ -478,17 +471,13 @@ db.createCollection("user")
 
    3.效果图（数据库中前端发送的数据）
 
-   ![avatar](image/db.png)
+   ![avatar](image/db-test.png)
 
 **代码样例：**
 
-[index.js](https://github.com/xpcloud/baidu-map-miniprogramer/blob/master/pages/index/index.js)
+[index.js](https://github.com/xpcloud/map-miniprogram/blob/master/pages/index/index.js)
 
 
-
-
-
-调用百度地图 `API` 来获取位置信息
 
 
 
