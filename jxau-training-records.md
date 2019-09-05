@@ -116,7 +116,7 @@
 
 ps：小程序1.60版本后，给开发者提供了这个wx.createInnerAudioContext()api具体使用可以看文档
 
-[实现介绍]()
+[实现介绍](./pages/day3-part4-play-voice.md)
    
 # Day 4
 
