@@ -1,3 +1,4 @@
+# 使用小程序获取地理位置的API
 
 ### 1. 小程序获取位置信息
 
@@ -25,7 +26,7 @@
             },
     ```
 
-    ![](./image/mnp_getSetting_1.png)
+    ![avatar](../image/mnp_getSetting_1.png)
 
 + 在 ***xxx.js*** 中 配置
 
@@ -33,7 +34,7 @@
 
     + 当该标志是 ***underfind***，表示用户初次进入该页面，当该标志是 ***false***，表示用户初次进入该页面拒绝了地理授权，应进行重新要求获取授权。
 
-        ![](./image/mnp_getSetting_2.png)
+        ![avatar](../image/mnp_getSetting_2.png)
 
     + 配置代码如下
 
@@ -128,7 +129,7 @@
 
     + 实现效果
 
-        ![](./image/mnp_openmap.png)
+        ![avatar](../image/mnp_openmap.png)
 
 ------
 
@@ -158,15 +159,15 @@
 
 + 进入控制台，创建新项目
 
-    ![](./image/mnp_amap_1.png)
+    ![avatar](../image/mnp_amap_1.png)
 
 + 添加新key
 
-    ![](./image/mnp_amap_2.png)
+    ![avatar](../image/mnp_amap_2.png)
 
 + 勾选后，在刚创建的项目下即可看到key
 
-    ![](./image/mnp_amap_3.png)
+    ![avatar](../image/mnp_amap_3.png)
 
 ##### 2.2.2. 配置项目
 
@@ -176,19 +177,19 @@
 
     + 登录微信公众平台(https://mp.weixin.qq.com/)，在 "设置"－>"开发设置" 中设置 ***request*** 合法域名，将 ***https://restapi.amap.com*** 中添加进去
 
-        ![](./image/mnp_amap_config_3.png)
+        ![avatar](../image/mnp_amap_config_3.png)
 
     + 测试环境下
 
         + 开发者工具 - 详情 - 本地设置 - 勾选 不校验
 
-        ![](./image/mnp_amap_config_2.png)
+        ![avatar](../image/mnp_amap_config_2.png)
 
 + 下载api https://lbs.amap.com/api/wx/download
   
     + 将解压后得到的 ***amap-wx.js*** 文件拷贝至 项目新建目录 ***libs*** 下
 
-        ![](./image/mnp_amap_config_1.png)
+        ![avatar](../image/mnp_amap_config_1.png)
 
 ##### 2.2.3. 调用api 获取数据
 
@@ -280,7 +281,7 @@
 
 + 获取返回值
 
-    ![](./image/mnp_amap_poi.png)
+    ![avatar](../image/mnp_amap_poi.png)
 
 + 调用 ***getRegeo*** 方法，获取 ***地址描述数据***
 
@@ -302,9 +303,9 @@
 
     + 获取返回值
 
-        ![](./image/mnp_amap_detail_1.png)
-        ![](./image/mnp_amap_detail_2.png)
-        ![](./image/mnp_amap_detail_3.png)
+        ![avatar](../image/mnp_amap_detail_1.png)
+        ![avatar](../image/mnp_amap_detail_2.png)
+        ![avatar](../image/mnp_amap_detail_3.png)
     
 + 调用 ***getWeather*** 方法，获取 ***实时天气数据***
 
@@ -324,4 +325,4 @@
     ```
     + 获取返回值
 
-        ![](./image/mnp_amap_weather.png)
+        ![avatar](../image/mnp_amap_weather.png)

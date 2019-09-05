@@ -1,3 +1,5 @@
+# 搭建一个后端项目
+
 ### 1. thinkjs
 
 #### 1.1. 安装环境
@@ -54,7 +56,7 @@
 
   - 执行完成后，会在控制台下看见类似日志
 
-    ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/thinkjs_log.png)
+    ![avatar](../image/thinkjs_log.png)
 
   - 验证创建完成
 
@@ -63,7 +65,7 @@
 
   - Thinkjs框架默认项目结构
 
-    ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/thinkjs_project_structure.png)
+    ![avatar](../image/thinkjs_project_structure.png)
 
 ------
 

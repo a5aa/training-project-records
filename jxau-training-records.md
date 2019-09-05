@@ -10,7 +10,7 @@
     - [三、搭建一个后端项目](#三搭建一个后端项目)
     - [四、实现后端项目与mongodb连接](#四实现后端项目与mongodb连接)
     - [五、通过后端实现对mongodb的CURD操作](#五通过后端实现对mongodb的curd操作)
-    - [六、使用小程序获取地理位置的Api](#六使用小程序获取地理位置的api)
+    - [六、使用小程序获取地理位置的API](#六使用小程序获取地理位置的api)
     - [七、编写地理信息存储Api](#七编写地理信息存储api)
     - [八、小程序中整合二维码扫描功能](#八小程序中整合二维码扫描功能)
     - [九、传递数据到后端](#九传递数据到后端)
@@ -20,7 +20,7 @@
     - [一、微信小程序调用地图api](#一微信小程序调用地图api)
     - [二、百度地图获取数据库表中信息的坐标显示在地图上](#二百度地图获取数据库表中信息的坐标显示在地图上)
     - [三、在小程序中使用echarts组件](#三在小程序中使用echarts组件)
-- [Day 4](#day-4)    
+- [Day 4](#day-4)
     - [一、设计二维码](#一设计二维码)
         - [1. 参阅](#1-参阅)
     - [二、获取位置信息](#二获取位置信息)
@@ -37,11 +37,11 @@
 
 ## 一、搭建Mongodb环境并建立表存储温度数据
 
-[具体搭建点此处](./pages/day1-db1.md)
+[实现介绍](./pages/day1-db1.md)
 
 ## 二、搭建三个节点的分布式数据库
 
-[三节点分布式数据库](./pages/day1-db2.md)
+[实现介绍](./pages/day1-db2.md)
 
 
 # Day2
@@ -65,98 +65,27 @@ https://www.jianshu.com/p/e232c3c9af37
 
 ## 三、搭建一个后端项目
 
-[详情](./pages/day2-part3-back-project.md)
+[实现介绍](./pages/day2-part3-back-project.md)
 
 ## 四、实现后端项目与mongodb连接
 
-[详情](./pages/day2-part4-mongodb.md)
+[实现介绍](./pages/day2-part4-mongodb.md)
 ​
 ## 五、通过后端实现对mongodb的CURD操作
 
-[详情](./pages/day2-part5-mongodb-curd.md)
+[实现介绍](./pages/day2-part5-mongodb-curd.md)
 
-## 六、使用小程序获取地理位置的Api
+## 六、使用小程序获取地理位置的API
 
-[详情](./pages/day2-part6-get-address-api.md)
+[实现介绍](./pages/day2-part6-get-address-api.md)
 
 ## 七、编写地理信息存储Api
 
->   以从高德地图api的数据为例
->   address latitude longitude name
-
-```
-    Page({
-        data:{
-            address:'', //地址
-            latitude:'',  //经度
-            longitude:'',  //纬度
-            name:''  // 名字
-        },
-        xxx: function () {
-            let that = this
-            wx.request({
-                //https 需要ssl 测试环境不加s
-                url: 'http://127.0.0.1:端口号/控制器名/函数名',
-                method: 'post',
-                data: {
-                    // 上传参数
-                    address:that.data.address,
-                    latitude:that.data.latitude,
-                    longitude:that.data.longitude,
-                    name:that.data.name
-                },
-                success(res) {
-                //成功回调函数
-                }
-            })
-        }
-    })
-    
-```
+[实现介绍](./pages/day2-part6-get-address-api.md)
 
 ## 八、小程序中整合二维码扫描功能
 
-> 官方文档： https://mp.weixin.qq.com/debug/wxadoc/dev/api/scancode.html
-
-+ 扫码返回参数
-
-    + res.result   // 数据
-    + res.scanType // 二维码类型
-    + res.charSet  // 字符集
-    + res.path     // 路径
-
-```
-    Page({
-    data: {
-        show: {},
-    },
-    click: function () {
-        var that = this;
-        wx.scanCode({       // 调用扫码api
-            success: (res) => {
-                that.setData({
-                    show: res
-                })
-                wx.showToast({
-                    title: '成功',
-                    icon: 'success',
-                    duration: 2000
-                })
-            },
-            fail: (res) => {
-                wx.showToast({
-                    title: '失败',
-                    icon: 'success',
-                    duration: 2000
-                })
-            },
-            complete: (res) => {
-            }  
-        })
-    }
-    })
-
-```
+[实现介绍](./pages/day2-part8-weixin-scan.md)
 
 ## 九、传递数据到后端
 
@@ -179,16 +108,16 @@ https://www.jianshu.com/p/e232c3c9af37
 
 ## 一、微信小程序调用地图api
 
-[详情](./pages/day3-weixin-map.md)
+[实现介绍](./pages/day3-weixin-map.md)
 
 
 ## 二、百度地图获取数据库表中信息的坐标显示在地图上
 
-[详情](./pages/day3-show-db-map.md)
+[实现介绍](./pages/day3-show-db-map.md)
 
 ## 三、在小程序中使用echarts组件
 
-[详情](./pages/day3-show-echarts.md)
+[实现介绍](./pages/day3-show-echarts.md)
    
 # Day 4
 
@@ -200,15 +129,15 @@ https://cli.im/ - 草料二维码
 
 ## 二、获取位置信息
 
-[详情](./pages/day4-part2-get-addr-info.md)
+[实现介绍](./pages/day4-part2-get-addr-info.md)
 
 ## 三、扫描获取二维码中的信息
 
-[详情](./pages/day4-part3-scan-info.md)
+[实现介绍](./pages/day4-part3-scan-info.md)
 
 ## 四、后端接收保存数据
 
-[详情](./pages/day4-part4-back-project-get-db.md)
+[实现介绍](./pages/day4-part4-back-project-get-db.md)
 
 **代码样例：**
 
@@ -224,7 +153,7 @@ https://cli.im/ - 草料二维码
 
 ## 二、实现
 
-[详情](./pages/day5-part2-camera-smile-face.md)
+[实现介绍](./pages/day5-part2-camera-smile-face.md)
 
 ### 3. 暂未实现
 

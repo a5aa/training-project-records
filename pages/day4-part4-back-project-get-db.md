@@ -1,3 +1,4 @@
+# 后端接收保存数据
 
 ### 1. 目标
 
@@ -41,4 +42,4 @@ db.createCollection("user")
 
 #### 2.3. 效果图（数据库中前端发送的数据）
 
-   ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/db-test.png)
+   ![avatar](../image/db-test.png)

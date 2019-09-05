@@ -1,3 +1,5 @@
+# 后端项目连接mongodb
+
 ### 1. ThinkJS
 
 #### 1.1. 让框架支持mongdb
@@ -32,11 +34,12 @@
 
   - 以后也要在此目录下开启服务，否则后台连接不上服务器
 
+
 #### 1.3. 连接mongodb
 
 - 修改 ***config*** 目录下的 ***adapter.js*** 文件
 
-  ![avatar](https://github.com/xpcloud/training-project-records/blob/master/image/thinkjs_connet_mongo.png)
+  ![avatar](../image/thinkjs_connet_mongo.png)
 
 ------
 
