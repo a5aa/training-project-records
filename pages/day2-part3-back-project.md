@@ -2,6 +2,8 @@
 
 ### 1. thinkjs
 
+> 参考 https://thinkjs.org/doc/index.html
+
 #### 1.1. 安装环境
 
 - 安装Node.js

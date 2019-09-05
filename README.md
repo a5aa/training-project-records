@@ -10,9 +10,13 @@
 
 # Git使用
 
-有时间可阅读 [廖雪峰的Git教程](https://www.liaoxuefeng.com/wiki/896043488029600) ：)
+有时间可阅读
 
-也可观摩 [超哥的教程](https://github.com/xiexingchao98/jxau-iot-training-note-2019/blob/master/pages/upload-local-code-to-github.adoc)
+[Git 教程（廖雪峰）](https://www.liaoxuefeng.com/wiki/896043488029600)
+
+或者
+
+[Git 原理入门（阮一峰）](http://www.ruanyifeng.com/blog/2018/10/git-internals.html)
 
 ### 基本操作
 
