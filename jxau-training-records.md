@@ -52,9 +52,8 @@
 
 https://thinkjs.org/doc/index.html
 
-### 2. 物流模拟
-
 https://www.jianshu.com/p/e232c3c9af37
+
 
 ## 二、后端服务
 
@@ -63,40 +62,42 @@ https://www.jianshu.com/p/e232c3c9af37
 - python + Thinkjs + mongodb
 - python + flask + mongodb
 
-## 三、搭建一个后端项目
+### 2. 搭建一个后端项目
 
 [实现介绍](./pages/day2-part3-back-project.md)
 
-## 四、实现后端项目与mongodb连接
+### 3. 实现后端项目与mongodb连接
 
 [实现介绍](./pages/day2-part4-mongodb.md)
 ​
-## 五、通过后端实现对mongodb的CURD操作
+### 4. 通过后端实现对mongodb的CURD操作
 
 [实现介绍](./pages/day2-part5-mongodb-curd.md)
 
-## 六、使用小程序获取地理位置的API
+## 三、物流模拟
+
+### 1. 使用小程序获取地理位置的API
 
 [实现介绍](./pages/day2-part6-get-address-api.md)
 
-## 七、编写地理信息存储Api
+### 2. 编写地理信息存储Api
 
 [实现介绍](./pages/day2-part6-get-address-api.md)
 
-## 八、小程序中整合二维码扫描功能
+### 3. 小程序中整合二维码扫描功能
 
 [实现介绍](./pages/day2-part8-weixin-scan.md)
 
-## 九、传递数据到后端
+### 4. 传递数据到后端
 
-### 1. 生成一个二维码
+#### 4.1. 生成一个二维码
 
 + https://cli.im/ - 草料二维码
 
 扫码后 将数据post给后端
 参考 **7 - 编写地理信息存储API**
 
-## 十、后端对个人信息数据进行接收，存储到数据库中
+### 5. 后端对个人信息数据进行接收，存储到数据库中
 
 参考 **5.1.4 - thinkjs 特定 CURD 封装**
 
