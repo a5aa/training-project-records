@@ -118,6 +118,12 @@ https://www.jianshu.com/p/e232c3c9af37
 ## 三、在小程序中使用echarts组件
 
 [实现介绍](./pages/day3-show-echarts.md)
+
+## 四、语音播放功能实现
+
+ps：小程序1.60版本后，给开发者提供了这个wx.createInnerAudioContext()api具体使用可以看文档
+
+[实现介绍]()
    
 # Day 4
 
