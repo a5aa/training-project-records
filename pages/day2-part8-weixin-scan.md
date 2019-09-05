@@ -4,10 +4,12 @@
 
 + 扫码返回参数
 
-    + res.result   // 数据
-    + res.scanType // 二维码类型
-    + res.charSet  // 字符集
-    + res.path     // 路径
+    |参数|含义|
+    |--|:--:|
+    |res.result|数据|
+    |res.scanType|二维码类型|
+    |res.charSet|字符集|
+    |res.path|路径|
 
 ```
     Page({
