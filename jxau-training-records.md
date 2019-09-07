@@ -154,8 +154,6 @@ https://cli.im/ - 草料二维码
 
 [实现介绍](./pages/day5-part2-camera-smile-face.md)
 
-### 3. 暂未实现
-
 ## 三、参考：
 * https://blog.csdn.net/weixin_36882413/article/details/80674565
 * https://blog.csdn.net/Einstellung/article/details/100078860 

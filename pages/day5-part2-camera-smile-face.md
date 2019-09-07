@@ -38,6 +38,7 @@ wx.error(function(res){
     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 });
 ```
+
 ### 2. 微笑检测的实现
 #### 2.1. 微笑检测大概流程
 * 用深度学习技术做分类
@@ -111,3 +112,96 @@ while True:
 camera.release()  # 清空相机
 cv2.destroyAllWindows()  # 关闭所有window
 ```
+
+### 3. 封装"微笑检测"为后端API
+
+#### 3.1. 编写脚本文件
+
+本案例使用 python 编写脚本文件
+
+>首先识别并框住人脸所在部位，然后在此基础上继续识别框住嘴唇部位 
+>
+>通过判断嘴角上扬的高度来确定是否微笑
+>
+>先设定一个全局变量 flag = 0，假设没有微笑
+>
+>若微笑，则在识别嘴唇的代码块后设 flag 为 1
+
+[参考代码](https://github.com/LiuXiaolong19920720/smile-detection-Python)
+
+#### 3.2. 前端图片传给后端
+
+**实现方法：**
+
+前端 `index.js` 中在上传图片功能 `wx.chooseImage` 的 `success` 回调函数内
+
+使用 `wx.uploadFile` 方法上传图片
+
+```
+//上传图片
+wx.uploadFile({
+    url: 'http://127.0.0.1:8360/smile/upload',
+    filePath: that.data.smileImage,
+    name: 'image',
+    formData: {
+        'userId': 10001
+    },
+    success(res) {
+        const data = res.data
+        console.log(res);
+    }
+})
+```
+
+Thinkjs后端在控制器中添加自己的控制文件，接收前端传来的图片
+
+```
+// src/controller/smile.js
+
+const Base = require("./base.js");
+const fs = require('fs');
+const path = require('path');
+const rename = think.promisify(fs.rename, fs);
+module.exports = class extends think.Controller {
+    async uploadAction(){
+        const file = this.file('image');
+        console.log(file);
+        // 如果上传的是 png 格式的图片文件，则移动到其他目录
+        if (file) {
+            const filepath = path.join(think.ROOT_PATH, `www/static/upload/fake_smile.png`);
+            think.mkdir(path.dirname(filepath));
+            await rename(file.path, filepath);
+        }
+    }
+
+    async downloadAction(){
+        const filepath = path.join(think.ROOT_PATH, 'smile.png');
+        ctx.download(filepath);
+    }
+}
+```
+
+保存到 `www/static/upload` 目录中，作为参数被后续脚本文件调用。
+
+#### 3.3. 后端将图片作为参数传递给 python 脚本执行
+
+在以上 `smile.js` 的`if`判断后面加上如下代码**传参并调用**python脚本文件
+```
+// smile.js
+
+const spawn = require('child_process').spawnSync;
+const ls = spawn('python', ['smile.py', filepath]);
+```
+
+`python`脚本文件导入`sys`模块获取传递的参数
+
+```
+// smile.py
+
+import sys
+img = cv2.imread(sys.argv[1])
+```
+
+#### 3.4. 后端返回结果给前端显示
+
+
